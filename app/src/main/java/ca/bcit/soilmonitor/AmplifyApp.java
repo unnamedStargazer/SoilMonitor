@@ -6,7 +6,6 @@ import android.util.Log;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-import com.amplifyframework.core.Amplify;
 
 public class AmplifyApp extends Application {
     public void onCreate() {
