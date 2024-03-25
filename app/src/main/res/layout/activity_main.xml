@@ -7,57 +7,59 @@
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
     android:background="@color/white">
-    <LinearLayout
-        android:id="@+id/header_container"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/header_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginLeft="10dp">-->
 
-        <LinearLayout
-            android:id="@+id/header_title_container"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center_horizontal"
-                android:text="OnlyPlants"
+<!--        <LinearLayout-->
+<!--            android:id="@+id/header_title_container"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="top"-->
+<!--                android:fontFamily="sans-serif-medium"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:text="OnlyPlants"-->
 
-                android:textAlignment="center"
-                android:textSize="40sp"
-                android:textColor="@color/green_leaf"/>
+<!--                android:textAlignment="center"-->
+<!--                android:textSize="40sp"-->
+<!--                android:textColor="@color/green_leaf"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center_horizontal"
-                android:text="monitor your plants, anywhere, anytime."
-                android:textAlignment="center"
-                android:textSize="10sp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/green_light"
-                android:textStyle="italic"
-                />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="top"-->
+<!--                android:fontFamily="sans-serif-medium"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:text="monitor your plants, anywhere, anytime."-->
+<!--                android:textAlignment="center"-->
+<!--                android:textSize="10sp"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:textColor="@color/green_light"-->
+<!--                android:textStyle="italic"-->
+<!--                />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
 
-        <ImageView
-            android:id="@+id/header_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/plant_icon"
-            android:layout_marginLeft="20dp"
-            android:paddingLeft="30dp"
-            />
+<!--        <ImageView-->
+<!--            android:id="@+id/header_icon"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/plant_icon"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:paddingLeft="30dp"-->
+<!--            />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
+
+    <include layout="@layout/header_layout" />
 
     <LinearLayout
         android:layout_width="match_parent"

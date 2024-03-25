@@ -47,22 +47,28 @@ public class MainActivity extends AppCompatActivity {
     private void configureMPChart() {
         //no description text
         mpLineChart.getDescription().setEnabled(false);
+
         //enable touch gesture
         mpLineChart.setTouchEnabled(true);
+
         //enable scaling and dragging
         mpLineChart.setDragEnabled(true);
         mpLineChart.setScaleEnabled(true);
+
         //remove gridline
         mpLineChart.getAxisRight().setDrawGridLines(false);
         mpLineChart.getAxisLeft().setDrawGridLines(false);
         mpLineChart.getXAxis().setDrawGridLines(false);
+
         //remove outer line
         mpLineChart.getAxisRight().setDrawAxisLine(false);
         mpLineChart.getAxisLeft().setDrawAxisLine(false);
         mpLineChart.getXAxis().setDrawAxisLine(false);
+
         //remove axis labels
         mpLineChart.getAxisRight().setDrawLabels(false);
         mpLineChart.getAxisLeft().setDrawLabels(false);
+
         //set X axis label to the bottom inside
         mpLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
         mpLineChart.getXAxis().setTextColor(Color.parseColor("#A07E63"));
@@ -84,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         data.setValueTextColor(Color.parseColor(textColour));
         data.setValueTextSize(12);
         data.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
     }
 
     private ArrayList<Entry> dataValues1(){
@@ -112,9 +117,4 @@ public class MainActivity extends AppCompatActivity {
 
         return dataVals;
     }
-
-
-
-
-
 }
