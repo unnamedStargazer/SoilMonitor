@@ -12,6 +12,14 @@ public class AmplifyApp extends Application {
         super.onCreate();
 
         amplifyConfigure();
+        amplifyFetchAuth();
+    }
+
+    private void amplifyFetchAuth() {
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
     }
 
     private void amplifyConfigure() {

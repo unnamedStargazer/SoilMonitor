@@ -1,120 +1,89 @@
 package ca.bcit.soilmonitor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
-    LineChart mpLineChart;
-    HashMap<String, String> mapColor = new HashMap<>();
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction;
+
+    AccountFragment accountFragment = new AccountFragment();
+    DevicesFragment devicesFragment = new DevicesFragment();
+    HomeFragment homeFragment = new HomeFragment();
+    SettingsFragment settingsFragment = new SettingsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-        mapColor.put("greenLeaf", "#7FB241");
-        mapColor.put("brown", "#A07E63");
-        mapColor.put("blue","#1ecbe1");
 
-        mpLineChart = findViewById(R.id.graph);
+        addFragments();
 
-        LineDataSet lineDataSet1 = new LineDataSet(dataValues1(),"Temp");
-        LineDataSet lineDataSet2 = new LineDataSet(dataValues2(), "Humidity");
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(lineDataSet1);
-        dataSets.add(lineDataSet2);
-        LineData data = new LineData(dataSets);
-        mpLineChart.setData(data);
-        mpLineChart.invalidate();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int itemId = menuItem.getItemId();
 
-        configureMPChart();
-        configureDataset(lineDataSet1, mapColor.get("greenLeaf"), mapColor.get("brown"));
-        configureDataset(lineDataSet2, mapColor.get("blue"), mapColor.get("brown"));
-    }
-    
-    private void configureMPChart() {
-        //no description text
-        mpLineChart.getDescription().setEnabled(false);
-
-        //enable touch gesture
-        mpLineChart.setTouchEnabled(true);
-
-        //enable scaling and dragging
-        mpLineChart.setDragEnabled(true);
-        mpLineChart.setScaleEnabled(true);
-
-        //remove gridline
-        mpLineChart.getAxisRight().setDrawGridLines(false);
-        mpLineChart.getAxisLeft().setDrawGridLines(false);
-        mpLineChart.getXAxis().setDrawGridLines(false);
-
-        //remove outer line
-        mpLineChart.getAxisRight().setDrawAxisLine(false);
-        mpLineChart.getAxisLeft().setDrawAxisLine(false);
-        mpLineChart.getXAxis().setDrawAxisLine(false);
-
-        //remove axis labels
-        mpLineChart.getAxisRight().setDrawLabels(false);
-        mpLineChart.getAxisLeft().setDrawLabels(false);
-
-        //set X axis label to the bottom inside
-        mpLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
-        mpLineChart.getXAxis().setTextColor(Color.parseColor("#A07E63"));
-        mpLineChart.getXAxis().setTextSize(15);
-        mpLineChart.getLegend().setTextColor(Color.parseColor("#A07E63"));
+                if (itemId == R.id.account) {
+                    switchFragment(accountFragment);
+                    return true;
+                } else if (itemId == R.id.devices) {
+                    switchFragment(devicesFragment);
+                    return true;
+                } else if (itemId == R.id.home) {
+                    switchFragment(homeFragment);
+                    return true;
+                } else if (itemId == R.id.settings) {
+                    switchFragment(settingsFragment);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
-    private void configureDataset(LineDataSet data, String lineColour, String textColour) {
+    private void addFragments() {
+//        Log.i("addFragmentsI", fragmentManager.getFragments().toString());
+        fragmentTransaction = fragmentManager.beginTransaction();
 
-        //set color of the data line
-        data.setColor(Color.parseColor(lineColour));
-        //enable color filled
-        data.setDrawFilled(true);
-        //set color filled
-        data.setFillColor(Color.parseColor(lineColour));
-        //set color of circle
-        data.setCircleColor(Color.parseColor(lineColour));
-        //set color of value
-        data.setValueTextColor(Color.parseColor(textColour));
-        data.setValueTextSize(12);
-        data.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        fragmentTransaction.add(R.id.nav_fragment, accountFragment);
+        fragmentTransaction.add(R.id.nav_fragment, devicesFragment);
+        fragmentTransaction.add(R.id.nav_fragment, homeFragment);
+        fragmentTransaction.add(R.id.nav_fragment, settingsFragment);
+
+        fragmentTransaction.hide(accountFragment);
+        fragmentTransaction.hide(homeFragment);
+        fragmentTransaction.hide(devicesFragment);
+        fragmentTransaction.hide(settingsFragment);
+
+        fragmentTransaction.commit();
     }
 
-    private ArrayList<Entry> dataValues1(){
-        ArrayList<Entry> dataVals = new ArrayList<Entry>();
-        dataVals.add(new Entry(0, 20));
-        dataVals.add(new Entry(10, 21));
-        dataVals.add(new Entry(20, 22));
-        dataVals.add(new Entry(30, 23));
-        dataVals.add(new Entry(40, 23));
-        dataVals.add(new Entry(50, 24));
-        dataVals.add(new Entry(60, 25));
+    private void switchFragment(Fragment fragment) {
+        fragmentTransaction = fragmentManager.beginTransaction();
 
-        return dataVals;
-    }
+        for (Fragment fragmentIterator : fragmentManager.getFragments()) {
+            if (fragmentIterator == fragment) {
+                fragmentTransaction.show(fragmentIterator);
+            } else {
+                fragmentTransaction.hide(fragmentIterator);
+            }
+        }
 
-    private ArrayList<Entry> dataValues2(){
-        ArrayList<Entry> dataVals = new ArrayList<Entry>();
-        dataVals.add(new Entry(0, 12));
-        dataVals.add(new Entry(5, 14));
-        dataVals.add(new Entry(15, 16));
-        dataVals.add(new Entry(25, 18));
-        dataVals.add(new Entry(35, 20));
-        dataVals.add(new Entry(45, 22));
-        dataVals.add(new Entry(55, 24));
-
-        return dataVals;
+        fragmentTransaction.commit();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, fragment).commit();
     }
 }

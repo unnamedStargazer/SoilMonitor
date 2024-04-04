@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green_leaf">#719C40</color>
     <color name="green_light">#7FB241</color>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#F44336</color>
+    <color name="colorAccent">#F44336</color>
 </resources>

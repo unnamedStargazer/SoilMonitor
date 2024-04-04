@@ -14,18 +14,19 @@
         android:theme="@style/Theme.SoilMonitor"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".AuthActivity"
             android:exported="true"
-            android:label="@string/title_activity_login">
+            android:label="@string/title_activity_auth"
+            android:theme="@style/Theme.SoilMonitor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
